@@ -154,6 +154,28 @@ Digite o ID do contato: 1
 Tem certeza que deseja excluir o contato de Dave? [s/n]: s
 ```
 
+```text
+========================================
+           AGENDA DE CONTATOS           
+========================================
+__________________MENU__________________
+[1] - Adicionar Contato
+[2] - Listar Contatos
+[3] - Buscar Contato
+[4] - Editar Contato
+[5] - Remover Contato
+[6] - Sair
+----------------------------------------
+Digite sua opção: 2
+                                     Lista de Contatos                                      
+┏━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ ID ┃ Nome         ┃ Telefone    ┃ Email                    ┃ Endereço                    ┃
+┡━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ 2  │ Dave         │ 33988881111 │ email@dominio.com        │ rua da casa, numero -bairro │
+│ 3  │ Jones Manoel │ 50933339999 │ jones2030@presidente.com │ None                        │
+└────┴──────────────┴─────────────┴──────────────────────────┴─────────────────────────────┘
+```
+
 ## Decisões de projeto
 
 - A classe `Agenda` não acessa arquivos diretamente.
