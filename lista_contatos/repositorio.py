@@ -17,7 +17,7 @@ class RepositorioContato(ABC):
 
 class RepositorioMemoria(RepositorioContato):
     def __init__(self, contatos:list = None):
-        super.__init__()
+        super().__init__()
         self._contatos: list[dict]= []
 
         if contatos is not None:
@@ -32,7 +32,7 @@ class RepositorioMemoria(RepositorioContato):
 
 class RepositorioJson(RepositorioContato):
     def __init__(self, caminho_repo:str = None):
-        super.__init__()
+        super().__init__()
         if caminho_repo is None:
             diretorio = Path()
             caminho_repo = diretorio / "dados" / "contatos.json"

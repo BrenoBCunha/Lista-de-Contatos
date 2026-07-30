@@ -4,4 +4,4 @@ __pycache__/
 .coverage
 .venv/
 dados/contatos.json
-interface.py
+CLImain.py
