@@ -1,8 +1,35 @@
 from lista_contatos.contato import Contato
+from abc import ABC, abstractmethod
 import json
 from pathlib import Path
 
-class RepositorioJson:
+class RepositorioContato(ABC):
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def salvar(self):
+        return NotImplementedError
+
+    @abstractmethod
+    def carregar(self):
+        return NotImplementedError
+
+class RepositorioMemoria(RepositorioContato):
+    def __init__(self, contatos:list = None):
+        self._contatos: list[dict]= []
+
+        if contatos is not None:
+            self.salvar(contatos)
+
+    def salvar(self, dados) -> None:
+        self._contatos = [contato.para_dict() for contato in dados]
+
+    def carregar(self):
+        return [Contato.de_dict(contato.copy()) for contato in self._contatos]
+        
+
+class RepositorioJson(RepositorioContato):
     def __init__(self, caminho_repo:str = None):
         if caminho_repo is None:
             diretorio = Path()
