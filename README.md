@@ -1,6 +1,6 @@
 # Lista de Contatos em POO
 
-Este projeto consiste em um CRUD (aplicação para cadastrar, consultar, editar e remover contatos) em CLI (aplicação em linha de comando) de uma lista de contatos. O projeto foi desenvolvido com o objetivo de praticar programação orientada a objetos, persistência em JSON e testes automatizados com pytest.
+Este projeto consiste em um CRUD (aplicação para cadastrar, consultar, editar e remover contatos) de uma lista de contatos utilizando CustomTkinter. O projeto foi desenvolvido com o objetivo de praticar programação orientada a objetos, persistência em JSON, testes automatizados com pytest e interação com interface gráfica.
 
 ## Funcionalidades
 
@@ -59,8 +59,10 @@ lista_de_contatos_poo/
 
 - `Contato`: representa e valida os dados de um contato.
 - `Agenda`: executa as regras de cadastro, busca, edição e remoção.
+- `RepositorioMemoria`: carrega e salva os contatos em memoria para maior eficiente nos testes unitarios.  
 - `RepositorioJson`: carrega e salva os contatos em um arquivo JSON.
-- `main.py`: apresenta o menu e recebe os dados digitados pelo usuário.
+- `interface`: Cria e manipula a interface gráfica, recebe as dados do usuário e apresenta.
+- `main.py`: instancia o repositório, a agenda e a interface gráfica, iniciando a aplicação.
 
 ## Pré-requisitos
 
@@ -71,6 +73,12 @@ lista_de_contatos_poo/
 ## Instalação
 
 Clone o repositório.
+
+```bash
+git clone https://github.com/BrenoBCunha/Lista-de-Contatos.git
+cd Lista-de-Contatos
+```
+
 Crie um ambiente virtual.
 
 ### Windows
@@ -157,5 +165,9 @@ A estruturação de um projeto e separação de funções foi o principal foco d
 Breno Barbosa da Cunha
 
 - GitHub: [BrenoBCunha](https://github.com/BrenoBCunha)
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT.
 
 

@@ -90,7 +90,7 @@ def test_inicia_programa_sem_arquivo_criado(tmp_path):
 
     assert caminho_json.exists()
 
-def test_salva_contato_mesmo_apos_reiniciar_programa():
+def test_nova_agenda_carrega_contatos_do_repositorio():
     repositorio = RepositorioMemoria()
     agenda = Agenda(repositorio)
     agenda.adicionar("Breno", "82988884444") 
@@ -102,7 +102,7 @@ def test_salva_contato_mesmo_apos_reiniciar_programa():
     assert nova_agenda.buscar_por_id(1) is not None
     assert nova_agenda.buscar_por_id(1).nome == "Breno"
 
-def test_contato_editado_e_salvo_apos_reiniciar_programa():
+def test_nova_agenda_carrega_contato_editado():
     repositorio = RepositorioMemoria()
     agenda = Agenda(repositorio)
     agenda.adicionar("Breno", "82988884444") 
@@ -115,7 +115,7 @@ def test_contato_editado_e_salvo_apos_reiniciar_programa():
 
     assert nova_agenda.buscar_por_id(1).nome == "Ellie"
 
-def test_remover_persiste_apos_reiniciar_programa():
+def test_nova_agenda_persiste_remocao_de_contato():
     repositorio = RepositorioMemoria()
     agenda = Agenda(repositorio)
     agenda.adicionar("Breno", "82988884444") 
@@ -127,4 +127,47 @@ def test_remover_persiste_apos_reiniciar_programa():
     nova_agenda = Agenda(repositorio)
 
     assert not nova_agenda.buscar_por_id(1)
-    
+
+def test_salva_contatos_apos_reiniciar(tmp_path):
+    caminho_json = tmp_path / "contatos.json"
+    repositorio = RepositorioJson(caminho_json)
+    agenda = Agenda(repositorio)
+    agenda.adicionar("Breno", "82988884444") 
+
+    assert agenda.buscar_por_id(1).nome == "Breno"
+
+    novo_repositorio = RepositorioJson(caminho_json)
+    nova_agenda = Agenda(novo_repositorio)
+
+    assert nova_agenda.buscar_por_id(1) is not None
+    assert nova_agenda.buscar_por_id(1).nome == "Breno"
+
+def test_salva_edicao_de_contato_apos_reiniciar(tmp_path):
+    caminho_json = tmp_path / "contatos.json"
+    repositorio = RepositorioJson(caminho_json)
+    agenda = Agenda(repositorio)
+    agenda.adicionar("Breno", "82988884444")
+
+    assert agenda.buscar_por_id(1).nome == "Breno"
+
+    agenda.editar(1, "Ellie")
+
+    novo_repositorio = RepositorioJson(caminho_json)
+    nova_agenda = Agenda(novo_repositorio)
+
+    assert nova_agenda.buscar_por_id(1).nome == "Ellie"
+
+def test_salva_remocao_de_contato_apos_reiniciar(tmp_path):
+    caminho_json = tmp_path / "contatos.json"
+    repositorio = RepositorioJson(caminho_json)
+    agenda = Agenda(repositorio)
+    agenda.adicionar("Breno", "82988884444")
+
+    assert agenda.buscar_por_id(1).nome == "Breno"
+
+    agenda.remover(1)
+
+    novo_repositorio = RepositorioJson(caminho_json)
+    nova_agenda = Agenda(novo_repositorio)
+
+    assert nova_agenda.buscar_por_id(1) is None

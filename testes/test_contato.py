@@ -6,7 +6,7 @@ def test_cria_contato_sem_email_sem_endereco():
     assert contato.nome == "Breno"
     assert contato.telefone == "82988885555"
 
-def test_levanta_erro_ao_criar_contato_sem_nome_ou_email():
+def test_levanta_erro_ao_criar_contato_sem_nome_ou_telefone():
     with pytest.raises(ValueError):
         contato = Contato(1, "", "82988885555")
     with pytest.raises(ValueError):

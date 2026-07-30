@@ -32,7 +32,7 @@ class Interface(ctk.CTk):
         self.frame_pesquisa.grid(row=0, column=0, sticky="ew", pady=(0, 20))
         self.frame_pesquisa.grid_columnconfigure(0, weight=1)
 
-        self.entry_pesquisa = ctk.CTkEntry(self.frame_pesquisa, placeholder_text="Pesquisar por nome ou número...")
+        self.entry_pesquisa = ctk.CTkEntry(self.frame_pesquisa, placeholder_text="Pesquisar por nome...")
         self.entry_pesquisa.grid(row=0, column=0, sticky="ew", padx=(0, 10))
 
         self.btn_pesquisar = ctk.CTkButton(self.frame_pesquisa, text="Pesquisar", width=100, command= self._pesquisar)
@@ -49,35 +49,30 @@ class Interface(ctk.CTk):
         self._atualizar_lista()
 
 
-    def _atualizar_lista(self):
+    def _exibir_contatos(self, contatos):
         for widget in self.frame_lista.winfo_children():
             if isinstance(widget, ctk.CTkButton):
                 widget.destroy()
         
-        for contato in self._agenda.listar():
+        for contato in contatos:
             btn_contato = ctk.CTkButton(self.frame_lista, text = contato.nome, fg_color="#414141", hover_color="#666666", width=450, anchor= 'w', command=lambda id_contato = contato.id: self._abrir_detalhes(id_contato))
             btn_contato.pack(side='top', fill='x', padx=10, pady=5)
 
+
+    def _atualizar_lista(self):
+        self._exibir_contatos(self._agenda.listar())
         self.update_idletasks()
 
 
     def _pesquisar(self):
         busca = self.entry_pesquisa.get()
         resultados = self._agenda.buscar_por_nome(busca)
-
-        for widget in self.frame_lista.winfo_children():
-            if isinstance(widget, ctk.CTkButton):
-                widget.destroy()
-        
-        for contato in resultados:
-            btn_contato = ctk.CTkButton(self.frame_lista, text = contato.nome, fg_color="#414141", hover_color="#666666", width=450, anchor= 'w', command=lambda id_contato = contato.id: self._abrir_detalhes(id_contato))
-            btn_contato.pack(side='top', fill='x', padx=10, pady=5)
-
+        self._exibir_contatos(resultados)
         self.update_idletasks()
 
 
     def _abrir_novo_contato(self):
-        self.janela_contato = ctk.CTkToplevel()
+        self.janela_contato = ctk.CTkToplevel(self)
         self.janela_contato.title("Novo Contato")
         w = 350
         h = 260
@@ -154,7 +149,7 @@ class Interface(ctk.CTk):
             self.etr_endereco.insert(0, contato.endereco)
 
         # Configuração da janela
-        self.janela_contato.configure(title="Editar Contato")
+        self.janela_contato.title("Editar Contato")
 
         self.btn_add.configure(text='Editar', command= lambda: self._editar_contato(id_contato))
         self.btn_cancel.configure(text='Excluir', command= lambda: self._excluir_contato(id_contato))

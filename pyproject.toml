@@ -10,7 +10,7 @@ description = "Agenda de contatos em Python desenvolvida com POO"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "rich",
+    "customtkinter",
 ]
 
 

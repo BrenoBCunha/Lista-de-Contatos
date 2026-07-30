@@ -4,20 +4,16 @@ import json
 from pathlib import Path
 
 class RepositorioContato(ABC):
-    def __init__(self):
-        pass
-
     @abstractmethod
-    def salvar(self):
-        return NotImplementedError
+    def salvar(self, contatos):
+        ...
 
     @abstractmethod
     def carregar(self):
-        return NotImplementedError
+        ...
 
 class RepositorioMemoria(RepositorioContato):
     def __init__(self, contatos:list = None):
-        super().__init__()
         self._contatos: list[dict]= []
 
         if contatos is not None:
@@ -32,7 +28,6 @@ class RepositorioMemoria(RepositorioContato):
 
 class RepositorioJson(RepositorioContato):
     def __init__(self, caminho_repo:str = None):
-        super().__init__()
         if caminho_repo is None:
             diretorio = Path()
             caminho_repo = diretorio / "dados" / "contatos.json"
