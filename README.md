@@ -116,13 +116,13 @@ python -m pytest --cov=lista_contatos --cov-report=term-missing
 ## Exemplo de uso
 
 Interface inicial
-<img src="imagens/interface_inicial.png" width="150">
+<img src="imagens/interface_inicial.png" width="300">
 
 Adicionando contato
-![Texto alternativo](imagens/adicionando_contato.png)
+<img src="imagens/adicionando_contato.png" width="300">
 
 Exibição dos contatos adicionados
-![Texto alternativo](imagens/contatos_adicionados.png)
+<img src="imagens/contatos_adicionados.png" width="300">
 
 ## Decisões de projeto
 
