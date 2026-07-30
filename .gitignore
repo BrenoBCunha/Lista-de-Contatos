@@ -5,4 +5,3 @@ __pycache__/
 .venv/
 dados/contatos.json
 CLImain.py
-images
