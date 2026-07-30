@@ -10,7 +10,7 @@ Este projeto consiste em um CRUD (aplicação para cadastrar, consultar, editar 
 - [x] Editar contatos
 - [x] Remover contatos
 - [x] Salvar os dados em JSON
-- [ ] Interface gráfica em Tkinter
+- [x] Interface gráfica em CustomTkinter
 - [ ] Substituir a persistencia em JSON para SQlite ou MySQL
 
 ## Conceitos praticados
@@ -23,6 +23,7 @@ Este projeto consiste em um CRUD (aplicação para cadastrar, consultar, editar 
 - Manipulação de arquivos JSON
 - Testes automatizados
 - Injeção de dependência
+- Manipulação de interface gráfica
 
 
 ## Tecnologias
@@ -30,6 +31,7 @@ Este projeto consiste em um CRUD (aplicação para cadastrar, consultar, editar 
 - Python 3.14
 - Rich
 - pytest
+- CustomTkinter
 
 
 ## Estrutura do projeto
@@ -40,13 +42,14 @@ lista_de_contatos_poo/
 │   ├── __init__.py
 │   ├── agenda.py
 │   ├── contato.py
+│   ├── interface.py
 │   └── repositorio.py
 ├── testes/
 │   ├── test_agenda.py
 │   ├── test_contato.py
 │   └── test_repositorio.py
 ├── .gitignore
-├── __main__.py
+├── main.py
 ├── pyproject.toml
 ├── requirements.txt
 └── README.md
@@ -57,7 +60,7 @@ lista_de_contatos_poo/
 - `Contato`: representa e valida os dados de um contato.
 - `Agenda`: executa as regras de cadastro, busca, edição e remoção.
 - `RepositorioJson`: carrega e salva os contatos em um arquivo JSON.
-- `__main__.py`: apresenta o menu e recebe os dados digitados pelo usuário.
+- `main.py`: apresenta o menu e recebe os dados digitados pelo usuário.
 
 ## Pré-requisitos
 
@@ -94,7 +97,7 @@ python -m pip install -e ".[dev]"
 ## Como executar
 
 ```bash
-python __main__.py
+python main.py
 ```
 
 
@@ -112,69 +115,14 @@ python -m pytest --cov=lista_contatos --cov-report=term-missing
 
 ## Exemplo de uso
 
-```text
-========================================
-           AGENDA DE CONTATOS           
-========================================
-__________________MENU__________________
-[1] - Adicionar Contato
-[2] - Listar Contatos
-[3] - Buscar Contato
-[4] - Editar Contato
-[5] - Remover Contato
-[6] - Sair
-----------------------------------------
-Digite sua opção: 1
-----------------------------------------
-Digite o nome do contato: Dave
-----------------------------------------
-Digite o telefone do contato [(DDD)8888-8888]: 33944448888
-----------------------------------------
-Digite o email do contato [email@dominio.com] - aperte Enter para deixar em branco: 
-----------------------------------------
-Digite o endereço do contato - aperte Enter para deixar em branco: 
-```
+Interface inicial
+![Texto alternativo](images/interface_inicial.png)
 
-```text
-========================================
-           AGENDA DE CONTATOS           
-========================================
-__________________MENU__________________
-[1] - Adicionar Contato
-[2] - Listar Contatos
-[3] - Buscar Contato
-[4] - Editar Contato
-[5] - Remover Contato
-[6] - Sair
-----------------------------------------
-Digite sua opção: 5
-----------------------------------------
-Digite o ID do contato: 1
-================EXCLUIR=================
-Tem certeza que deseja excluir o contato de Dave? [s/n]: s
-```
+Adicionando contato
+![Texto alternativo](images/adicionando_contato.png)
 
-```text
-========================================
-           AGENDA DE CONTATOS           
-========================================
-__________________MENU__________________
-[1] - Adicionar Contato
-[2] - Listar Contatos
-[3] - Buscar Contato
-[4] - Editar Contato
-[5] - Remover Contato
-[6] - Sair
-----------------------------------------
-Digite sua opção: 2
-                                     Lista de Contatos                                      
-┏━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ ID ┃ Nome         ┃ Telefone    ┃ Email                    ┃ Endereço                    ┃
-┡━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ 2  │ Dave         │ 33988881111 │ email@dominio.com        │ rua da casa, numero -bairro │
-│ 3  │ Jones Manoel │ 50933339999 │ jones2030@presidente.com │ None                        │
-└────┴──────────────┴─────────────┴──────────────────────────┴─────────────────────────────┘
-```
+Exibição dos contatos adicionados
+![Texto alternativo](images/contatos_adicionados.png)
 
 ## Decisões de projeto
 
@@ -182,19 +130,20 @@ Digite sua opção: 2
 - A persistência foi isolada em `RepositorioJson`.
 - O caminho do arquivo é recebido pelo repositório, permitindo o uso de
   diretórios temporários nos testes.
-- A interface de linha de comando depende da `Agenda`, mas a `Agenda` não
+- A interface depende da `Agenda`, mas a `Agenda` não
   depende da interface.
 
 ## Limitações conhecidas
 
 - Busca não ordena os resultados por similaridade da busca
 - Não é possível buscar por telefone
+- Ainda não realizado o tratamento de erros de execução da interface
 
 
 ## Próximos passos
 
-- [ ] Criar um contrato comum para os repositórios
-- [ ] Implementar um repositório em memória para testes
+- [x] Criar um contrato comum para os repositórios
+- [x] Implementar um repositório em memória para testes
 - [ ] Substituir a persistência JSON por SQLite
 - [ ] Adicionar testes de integração da interface
 - [ ] Disponibilizar as operações por meio de uma API

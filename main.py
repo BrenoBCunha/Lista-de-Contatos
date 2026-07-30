@@ -8,7 +8,6 @@ def main():
     app = Interface(agenda)
 
     app.mainloop()
-    
 
 if __name__ == "__main__":
     main()
